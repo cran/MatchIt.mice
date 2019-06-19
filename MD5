@@ -1,0 +1,15 @@
+c64a35104134c08d06ec9376982e858c *DESCRIPTION
+5559a13b79457dce982d6b44d36ca3fd *NAMESPACE
+bc7c578311b15972176ac7689f0c2771 *NEWS.md
+4af74905ea41a82191005ed43962839e *R/HandOsteoarthritis.R
+1f51fa5cdf985eac3b54f44c37667e72 *R/KneeOsteoarthritis.R
+526bf4e815eeb448caab9896b3974534 *R/matchitmice.R
+415d6a9a02570240fd5cdf471519eece *R/matchmicedata.R
+718c7c5488b2727856509ccacc059be8 *README.md
+7ed466e206b9de2a0ab4c60effc31713 *data/HandOsteoarthritis.rda
+e279a87d25c153fa1006b036445864a6 *data/KneeOsteoarthritis.rda
+72db3f03c893c5beabb4437cbf59c20e *man/HandOsteoarthritis.Rd
+4fe4fa09deb01394c8a2be10ca77a610 *man/KneeOsteoarthritis.Rd
+2ce206371b1125e028e3990bc0dcbe2e *man/figure/logo.png
+dc96344c18b08fc4706000cc161de970 *man/matchitmice.Rd
+17effa7987725ba2ddd6f0f04ce9c920 *man/matchmicedata.Rd
