@@ -21,9 +21,7 @@ The \code{matchitmice.data()} function extracts matching data from an object of 
 The matched dataset of a \code{mimids} class object is extracted.
 }
 \examples{
-
 \donttest{
-
 #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 
 #Loading the 'handoa' dataset
@@ -38,7 +36,6 @@ matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets)
 
 #Extracting data of the first imputed dataset
 data1 <- matchitmice.data(matcheddatasets, n = 1)
-
 }
 }
 \references{

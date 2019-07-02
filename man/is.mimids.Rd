@@ -7,7 +7,7 @@
 is.mimids(object)
 }
 \arguments{
-\item{object}{This argument specifies the object intended to be checked is of the \code{mimids} class or not.}
+\item{object}{This argument specifies the object that should be checked to see if is of the \code{mimids} class or not.}
 }
 \value{
 This function returns a logical value indicating whether \code{object} is of the \code{mimids} class.
@@ -19,9 +19,7 @@ The \code{is.mimids()} function checks whether class of objects are \code{mimids
 The class of objects are checked to be of the \code{mimids}.
 }
 \examples{
-
 \donttest{
-
 #Loading the 'handoa' dataset
 data(handoa)
 
@@ -35,7 +33,6 @@ matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets, method = "exact")
 #Checking the 'matcheddatasets' object
 is.mimids(matcheddatasets)
 is(matcheddatasets)
-
 }
 }
 \seealso{

@@ -40,9 +40,7 @@ The \code{weightitmice()} function enables parametric models for causal inferenc
 The weighting is done using the \code{weightitmice(y ~ x1, ...)} command, where \code{y} is the vector of treatment assignments and \code{x1} represents the covariates to be used in the matching model. There are a number of matching options, detailed below. The default syntax is \code{weightitmice(formula, datasets = NULL, method = "nearest", model = "logit", ...)}. Summaries of the results can be seen graphically using \code{plot()} or numerically using \code{summary()} functions. The \code{print()} function also prints out the output.
 }
 \examples{
-
 \donttest{
-
 #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 
 #Loading the packages
@@ -58,7 +56,6 @@ datasets <- mice(handoa, m = 5, maxit = 1,
 
 #Weighting the imputed datasets, 'datasets'
 weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
-
 }
 }
 \references{

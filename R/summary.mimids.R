@@ -29,9 +29,7 @@
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Loading the 'handoa' dataset
 #' data(handoa)
 #'
@@ -44,7 +42,6 @@
 #'
 #' #Summarizing data of the first imputed dataset
 #' summ1 <- summary(matcheddatasets, n = 1)
-#'
 #' }
 
 summary.mimids <- function(object, n = 1, interactions = FALSE, addlvariables = NULL,

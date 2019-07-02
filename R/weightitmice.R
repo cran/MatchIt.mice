@@ -31,9 +31,7 @@
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 #'
 #' #Loading the packages
@@ -49,7 +47,6 @@
 #'
 #' #Weighting the imputed datasets, 'datasets'
 #' weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
-#'
 #' }
 
 weightitmice <- function (formula, datasets,

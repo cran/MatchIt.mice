@@ -21,9 +21,7 @@ The \code{weightitmice.data()} function extracts data from an object of the \cod
 The weighted dataset of a \code{wimids} class object is extracted.
 }
 \examples{
-
 \donttest{
-
 #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 
 #Loading the 'handoa' dataset
@@ -38,7 +36,6 @@ weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
 
 #Extracting data of the first imputed dataset
 data1 <- weightitmice.data(weighteddatasets, n = 1)
-
 }
 }
 \references{

@@ -4,8 +4,8 @@
 #### Matching Multiply Imputed Datasets
 <!-- badges: end -->
 
-[![](https://img.shields.io/badge/CRAN%20version-2.0.1-orange.svg?color=yellow&style=for-the-badge)](https://cran.r-project.org/package=MatchIt.mice)
-[![](https://img.shields.io/badge/github%20version-2.0.1-orange.svg?color=yellow&style=for-the-badge)](https://github.com/FarhadPishgar/MatchIt.mice)
+[![](https://img.shields.io/badge/CRAN%20version-2.0.2-orange.svg?color=yellow&style=for-the-badge)](https://cran.r-project.org/package=MatchIt.mice)
+[![](https://img.shields.io/badge/github%20version-2.0.2-orange.svg?color=yellow&style=for-the-badge)](https://github.com/FarhadPishgar/MatchIt.mice)
 
 ## Introduction
 
@@ -41,8 +41,6 @@ Implementing multiple imputation algorithms before matching procedures or before
 
 #### Step 1 - Preparing and Subsetting the Dataset
 
-The original dataset may include several variables that are not intended to be included in the multiple imputation procedure (e.g. the `ID` variable in the `handoa` dataset). Hence, the dataset should be subsetted before the imputation procedure (the excluded variables can be returned to the imputed datasets after the multiple imputation procedure using the `cbind()` function, please see the [`mice`](https://cran.r-project.org/package=mice) package reference manual for details). In this suggested workflow, this step has been skipped.
-
 The the [`MatchIt.mice`](https://cran.r-project.org/package=MatchIt.mice) package and `handoa` dataset (included in the [`MatchIt.mice`](https://cran.r-project.org/package=MatchIt.mice) package) are loaded:
 
 ``` r
@@ -51,17 +49,28 @@ library(MatchIt.mice, warn.conflicts = FALSE)
 data(handoa)
 ```
 
+The original dataset may include several variables that should not be included in the multiple imputation procedure (e.g. the `ID` variable in the `handoa` dataset). Hence, the dataset should be subsetted before the imputation procedure (the excluded variables can be returned to the imputed datasets after the multiple imputation procedure using the `binditmice()` function). The `handoa` dataset is subsetted:
+
+``` r
+idenoa <- handoa["ID"]
+
+handoa <- handoa[c("AGE", "SEX", "BMI", "SMOKING", "HANDUSE", "KNEEOA", "HANDOA")]
+```
+
 #### Step 2 - Imputing the Missing Data Points
 
 The [`mice`](https://cran.r-project.org/package=mice) package and its main function, `mice()`, provides several options for implementing a good practice of multiple imputation (there are several technical points that should be considered in this regard, please see the [`mice`](https://cran.r-project.org/package=mice) package reference manual for details):
 
 ``` r
 datasets <- mice(handoa, m = 5, maxit = 10,
-                 method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+                 method = c("", "", "mean", "polyreg", "logreg", "", ""))
 ```
 
+The output of this function will be saved in a `mids` class object (`datasets` here). Then, the excluded variables are returned to each multiply imputed datasets:
 
-The output of this function will be saved in a `mids` class object (`datasets` here).
+``` r
+datasets <- binditmice(datasets = datasets, data = idenoa)
+```
 
 #### Step 3 - Matching or Weighting the Imputed Datasets
 

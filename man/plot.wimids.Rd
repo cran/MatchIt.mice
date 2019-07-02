@@ -31,9 +31,7 @@ The \code{plot.wimids()} function plots an object of the \code{wimids} class.
 The matching profile of the \code{wimids} class objects is plotted.
 }
 \examples{
-
 \donttest{
-
 #Loading the 'handoa' dataset
 data(handoa)
 
@@ -46,7 +44,6 @@ weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
 
 #Plotting data of the first imputed dataset
 plot1 <- plot(weighteddatasets, n = 1)
-
 }
 }
 \references{

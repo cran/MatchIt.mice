@@ -31,7 +31,6 @@
 #' @export
 #'
 #' @examples
-#'
 #' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 #'
 #' #Loading the 'handoa' dataset

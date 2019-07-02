@@ -29,9 +29,7 @@
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 #'
 #' #Loading the 'handoa' dataset
@@ -48,7 +46,6 @@
 #' results <- with(data = weighteddatasets,
 #'                 exp = glm(HANDOA ~ SMOKING, weights = inverse.weights,
 #'                           na.action = na.omit, family = binomial))
-#'
 #' }
 
 with.wimids <- function(data, expr, ...) {
@@ -70,7 +67,7 @@ with.wimids <- function(data, expr, ...) {
 
   #Do the repeated analysis, store the result.
   for (i in seq_along(analyses)) {
-    data.i <- complete(object, i)
+    data.i <- weightitmice.data(data, i)
     analyses[[i]] <- eval(expr = substitute(expr), envir = data.i, enclos = parent.frame())
     if (is.expression(analyses[[i]]))
       analyses[[i]] <- eval(expr = analyses[[i]], envir = data.i, enclos = parent.frame())

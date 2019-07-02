@@ -31,9 +31,7 @@ The \code{plot.mimids()} function plots an object of the \code{mimids} class.
 The matching profile of the \code{mimids} class objects is plotted.
 }
 \examples{
-
 \donttest{
-
 #Loading the 'handoa' dataset
 data(handoa)
 
@@ -46,7 +44,6 @@ matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets)
 
 #Plotting data of the first imputed dataset
 plot1 <- plot(matcheddatasets, n = 1)
-
 }
 }
 \references{

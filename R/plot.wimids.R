@@ -30,9 +30,7 @@
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Loading the 'handoa' dataset
 #' data(handoa)
 #'
@@ -45,7 +43,6 @@
 #'
 #' #Plotting data of the first imputed dataset
 #' plot1 <- plot(weighteddatasets, n = 1)
-#'
 #' }
 
 plot.wimids <- function(x, n = 1, type = "QQ", discrete.cutoff = 5,

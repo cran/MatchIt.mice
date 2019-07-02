@@ -26,9 +26,7 @@
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Loading the 'handoa' dataset
 #' data(handoa)
 #'
@@ -41,7 +39,6 @@
 #'
 #' #Printing data of the first imputed dataset
 #' print1 <- print(matcheddatasets, n = 1)
-#'
 #' }
 
 print.mimids <- function(x, n = 1, digits = getOption("digits"), ...) {

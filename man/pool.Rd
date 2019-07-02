@@ -27,9 +27,7 @@ The \code{pool()} function combines the estimates from \code{n} repeated complet
 The \code{pool()} function averages the estimates of the complete data model and computes the total variance over the repeated analyses by the Rubin’s rules.
 }
 \examples{
-
 \donttest{
-
 #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 
 #Loading the 'handoa' dataset
@@ -49,7 +47,6 @@ results <- with(data = matcheddatasets,
 
 #Printing pooled results
 print(pool(results))
-
 }
 }
 \references{

@@ -29,9 +29,7 @@ The \code{summary.mimids()} function summarizes an object of the \code{mimids} c
 The matching profile of the \code{mimids} class objects is summarized.
 }
 \examples{
-
 \donttest{
-
 #Loading the 'handoa' dataset
 data(handoa)
 
@@ -44,7 +42,6 @@ matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets)
 
 #Summarizing data of the first imputed dataset
 summ1 <- summary(matcheddatasets, n = 1)
-
 }
 }
 \references{

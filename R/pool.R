@@ -28,9 +28,7 @@
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 #'
 #' #Loading the 'handoa' dataset
@@ -50,7 +48,6 @@
 #'
 #' #Printing pooled results
 #' print(pool(results))
-#'
 #' }
 
 pool <- function (object, dfcom = NULL) {

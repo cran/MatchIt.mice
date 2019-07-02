@@ -7,7 +7,7 @@
 is.wimids(object)
 }
 \arguments{
-\item{object}{This argument specifies the object intended to be checked is of the \code{wimids} class or not.}
+\item{object}{This aargument specifies the object that should be checked to see if is of the \code{wimids} class or not.}
 }
 \value{
 This function returns a logical value indicating whether \code{object} is of the \code{wimids} class.
@@ -19,9 +19,7 @@ The \code{is.wimids()} function checks whether class of objects are \code{wimids
 The class of objects are checked to be of the \code{wimids}.
 }
 \examples{
-
 \donttest{
-
 #Loading the 'handoa' dataset
 data(handoa)
 
@@ -35,7 +33,6 @@ weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
 #Checking the 'weighteddatasets' object
 is.wimids(weighteddatasets)
 is(weighteddatasets)
-
 }
 }
 \seealso{

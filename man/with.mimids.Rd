@@ -29,9 +29,7 @@ The \code{with()} function performs a computation on each of the \code{n} impute
 The \code{with()} performs a computation on each of the imputed datasets.
 }
 \examples{
-
 \donttest{
-
 #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 
 #Loading the 'handoa' dataset
@@ -48,7 +46,6 @@ matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets)
 results <- with(data = matcheddatasets,
                 exp = glm(HANDOA ~ SMOKING,
                           na.action = na.omit, family = binomial))
-
 }
 }
 \references{

@@ -22,9 +22,7 @@
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 #'
 #' #Loading the 'handoa' dataset
@@ -39,7 +37,6 @@
 #'
 #' #Extracting data of the first imputed dataset
 #' data1 <- matchitmice.data(matcheddatasets, n = 1)
-#'
 #' }
 
 matchitmice.data <- function (object, n = 1) {
@@ -53,9 +50,6 @@ matchitmice.data <- function (object, n = 1) {
 
   #Checking inputs format
   if(object[[1]]$m < n) {stop("The input for the 'n' is out of bounds.")}
-
-  #Printing out
-  cat("The matched imputed dataset: #", n,  "\n", sep = "")
 
   #Returning the output
   output <- na.omit(object[[4]][[n + 1]])

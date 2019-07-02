@@ -4,7 +4,7 @@
 #'
 #' @rdname is.mimids
 #'
-#' @param object This argument specifies the object intended to be checked is of the \code{mimids} class or not.
+#' @param object This argument specifies the object that should be checked to see if is of the \code{mimids} class or not.
 #'
 #' @description The \code{is.mimids()} function checks whether class of objects are \code{mimids} or not.
 #'
@@ -20,9 +20,7 @@
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Loading the 'handoa' dataset
 #' data(handoa)
 #'
@@ -36,7 +34,6 @@
 #' #Checking the 'matcheddatasets' object
 #' is.mimids(matcheddatasets)
 #' is(matcheddatasets)
-#'
 #' }
 
 is.mimids <- function(object) {
@@ -57,7 +54,7 @@ is.mimids <- function(object) {
 #'
 #' @rdname is.wimids
 #'
-#' @param object This argument specifies the object intended to be checked is of the \code{wimids} class or not.
+#' @param object This aargument specifies the object that should be checked to see if is of the \code{wimids} class or not.
 #'
 #' @description The \code{is.wimids()} function checks whether class of objects are \code{wimids} or not.
 #'
@@ -73,9 +70,7 @@ is.mimids <- function(object) {
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Loading the 'handoa' dataset
 #' data(handoa)
 #'
@@ -89,7 +84,6 @@ is.mimids <- function(object) {
 #' #Checking the 'weighteddatasets' object
 #' is.wimids(weighteddatasets)
 #' is(weighteddatasets)
-#'
 #' }
 
 is.wimids <- function(object) {
