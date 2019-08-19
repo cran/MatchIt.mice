@@ -2,11 +2,6 @@
 % Please edit documentation in R/weightitmice.R
 \name{weightitmice}
 \alias{weightitmice}
-\alias{WeightItmice}
-\alias{WeightItMICE}
-\alias{weightit.mice}
-\alias{WeightIt.mice}
-\alias{WeightIt.MICE}
 \title{Weights Multiply Imputed Datasets}
 \usage{
 weightitmice(formula, datasets, method = "nearest", distance = "logit",
@@ -43,10 +38,6 @@ The weighting is done using the \code{weightitmice(y ~ x1, ...)} command, where 
 \donttest{
 #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 
-#Loading the packages
-library(mice)
-library(MatchIt.mice)
-
 #Loading the 'handoa' dataset
 data(handoa)
 
@@ -73,3 +64,4 @@ Stef van Buuren and Karin Groothuis-Oudshoorn (2011). \code{mice}: Multivariate 
 \author{
 Farhad Pishgar
 }
+\keyword{functions}

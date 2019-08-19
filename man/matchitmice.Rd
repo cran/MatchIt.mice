@@ -2,11 +2,6 @@
 % Please edit documentation in R/matchitmice.R
 \name{matchitmice}
 \alias{matchitmice}
-\alias{MatchItmice}
-\alias{MatchItMICE}
-\alias{matchit.mice}
-\alias{MatchIt.mice}
-\alias{MatchIt.MICE}
 \title{Matches Multiply Imputed Datasets}
 \usage{
 matchitmice(formula, datasets, method = "nearest", distance = "logit",
@@ -40,6 +35,7 @@ The \code{matchitmice()} function enables parametric models for causal inference
 The matching is done using the \code{matchitmice(y ~ x1, ...)} command, where \code{y} is the vector of treatment assignments and \code{x1} represents the covariates to be used in the matching model. There are a number of matching options, detailed below. The default syntax is \code{matchitmice(formula, datasets = NULL, method = "nearest", model = "logit", ratio = 1, caliper = 0, ...)}. Summaries of the results can be seen graphically using \code{plot()} or numerically using \code{summary()} functions. The \code{print()} function also prints out the output.
 }
 \examples{
+
 #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 
 #Loading the 'handoa' dataset
@@ -51,6 +47,7 @@ datasets <- mice(handoa, m = 5, maxit = 1,
 
 #Matching the imputed datasets, 'datasets'
 matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets, method = 'exact')
+
 }
 \references{
 Daniel Ho, Kosuke Imai, Gary King, and Elizabeth Stuart (2007). Matching as Nonparametric Preprocessing for Reducing Model Dependence in Parametric Causal Inference. \emph{Political Analysis}, 15(3): 199-236. \url{http://gking.harvard.edu/files/abs/matchp-abs.shtml}

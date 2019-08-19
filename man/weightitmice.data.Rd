@@ -9,7 +9,7 @@ weightitmice.data(object, n = 1)
 \arguments{
 \item{object}{This argument specifies an object of the \code{wimids} class.}
 
-\item{n}{This argument specifies number of the weighted imputed dataset intended to extract its data. The input must be a positive integer. The default is \code{1}.}
+\item{n}{This argument specifies the weighted imputed dataset number, intended to extract its data. The input must be a positive integer. The default is \code{1}.}
 }
 \value{
 This function returns the imputed dataset sent to \code{weightitmice()} with weights of individuals of the datasets added (listed as the \code{inverse.weights} variables).
@@ -18,7 +18,7 @@ This function returns the imputed dataset sent to \code{weightitmice()} with wei
 The \code{weightitmice.data()} function extracts data from an object of the \code{wimids} class.
 }
 \details{
-The weighted dataset of a \code{wimids} class object is extracted.
+The weighted datasets within the \code{wimids} class object are extracted.
 }
 \examples{
 \donttest{
@@ -47,3 +47,4 @@ Daniel Ho, Kosuke Imai, Gary King, and Elizabeth Stuart (2007). Matching as Nonp
 \author{
 Farhad Pishgar
 }
+\keyword{functions}

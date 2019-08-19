@@ -1,5 +1,9 @@
 #' @title Prints a \code{wimids} Class Object
 #'
+#' @keywords functions
+#'
+#' @keywords functions
+#'
 #' @aliases print.wimids
 #'
 #' @rdname print.wimids
@@ -7,7 +11,7 @@
 #' @method print wimids
 #'
 #' @param x This argument specifies an object of the \code{wimids} class.
-#' @param n This argument specifies number of the weighted imputed dataset intended to print its matching profile. The input must be a positive integer. The default is \code{1}.
+#' @param n This argument specifies the weighted imputed dataset number, intended to print its matching profile. The input must be a positive integer. The default is \code{1}.
 #' @param digits This argument specifies minimal number of significant digits.
 #' @param ... Additional arguments to be passed to the \code{print.wimids()} function.
 #'

@@ -4,8 +4,8 @@
 #### Matching Multiply Imputed Datasets
 <!-- badges: end -->
 
-[![](https://img.shields.io/badge/CRAN%20version-2.0.2-orange.svg?color=yellow&style=for-the-badge)](https://cran.r-project.org/package=MatchIt.mice)
-[![](https://img.shields.io/badge/github%20version-2.0.2-orange.svg?color=yellow&style=for-the-badge)](https://github.com/FarhadPishgar/MatchIt.mice)
+[![](https://img.shields.io/badge/CRAN%20version-2.1.5-orange.svg?color=yellow&style=for-the-badge)](https://cran.r-project.org/package=MatchIt.mice)
+[![](https://img.shields.io/badge/github%20version-2.1.5-orange.svg?color=yellow&style=for-the-badge)](https://github.com/FarhadPishgar/MatchIt.mice)
 
 ## Introduction
 
@@ -33,7 +33,7 @@ devtools::install_github(repo = "FarhadPishgar/MatchIt.mice")
 
 #### Step 0 - Reading this manual
 
-Implementing multiple imputation algorithms before matching procedures or before estimating inverse propensity score weights for each individual may seem to be a time-consuming task. This suggested workflow tries to simplify this complex task into 5 steps:
+Implementing multiple imputation algorithms before matching procedures or before estimating inverse propensity score weights for each individual may seem to be a time-consuming task. This suggested workflow tries to simplify this process into 5 steps:
 
 <p align="center">
   <img width="300" src="man/figure/fig1.png">
@@ -49,7 +49,7 @@ library(MatchIt.mice, warn.conflicts = FALSE)
 data(handoa)
 ```
 
-The original dataset may include several variables that should not be included in the multiple imputation procedure (e.g. the `ID` variable in the `handoa` dataset). Hence, the dataset should be subsetted before the imputation procedure (the excluded variables can be returned to the imputed datasets after the multiple imputation procedure using the `binditmice()` function). The `handoa` dataset is subsetted:
+The original dataset may include several variables that should not be included in the multiple imputation procedure (e.g. the `ID` variable in the `handoa` dataset). Hence, the dataset should be subsetted before the imputation procedure (the excluded variables can be returned to the imputed datasets after the multiple imputation procedure or after the matching procedure using the `binditmice()` or `mergeitmice()` functions). The `handoa` dataset is subsetted:
 
 ``` r
 idenoa <- handoa["ID"]
@@ -84,7 +84,7 @@ matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE + BMI, datasets, ratio = 3, ca
 
 The output of the `matchitmice()` function will be saved in an object of the `mimids` class (`matcheddatasets` here). The `plot()`, `print()`, and `summary()` functions can be used to review detailed descriptions of these objects. Each of these objects includes data on:
 1.	Matched datasets compiled in a `mids` class object,
-2.	Matching model of the imputed datasets, 
+2.	Matching models of the imputed datasets, 
 3.	The method used for the matching procedure (`nearest` or `exact`), and
 4.	The matched imputed datasets
 
@@ -96,9 +96,9 @@ weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE + BMI, datasets)
 
 The output of the `weightitmice()` function will be saved in an object of the `wimids` class (`weighteddatasets` here). The `plot()`, `print()`, and `summary()` functions can be used to review detailed descriptions of these objects. Each of these objects includes data on:
 1.	Weighted datasets compiled in a `mids` class object,
-2.	Matching model of the imputed datasets,
+2.	Matching models of the imputed datasets,
 3.	The method used for the matching procedure (always `nearest`), and
-4.	The weighted imputed datasets
+4.	The weighted imputed datasets (the estimated weights are saved in the `inverse.weights` column)
 
 #### Step 4 - Analyzing the Imputed Datasets
 
@@ -126,7 +126,7 @@ print(pool(weightedresults))
 ```
 
 ## Acknowledgments
-I would like to thanks the CRAN team members for their comments and technical support. This package relies on the following packages, and please cite their reference manuals and vignettes in your work besides citing reference manual of this package:
+I would like to thanks the CRAN team members for their comments and technical support. This package relies on the following packages. Please cite their reference manuals and vignettes in your work besides citing reference manual of this package:
 1. [`MatchIt`](https://cran.r-project.org/package=MatchIt) package
 2. [`mice`](https://cran.r-project.org/package=mice) package
 

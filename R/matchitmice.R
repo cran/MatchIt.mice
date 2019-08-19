@@ -1,6 +1,6 @@
 #' @title Matches Multiply Imputed Datasets
 #'
-#' @aliases matchitmice MatchItmice MatchItMICE matchit.mice MatchIt.mice MatchIt.MICE
+#' @aliases matchitmice
 #'
 #' @rdname matchitmice
 #'
@@ -31,6 +31,7 @@
 #' @export
 #'
 #' @examples
+#'
 #' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 #'
 #' #Loading the 'handoa' dataset
@@ -42,6 +43,7 @@
 #'
 #' #Matching the imputed datasets, 'datasets'
 #' matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets, method = 'exact')
+#'
 
 matchitmice <- function (formula, datasets,
                          method = "nearest", distance = "logit", distance.options = list(),
@@ -50,11 +52,10 @@ matchitmice <- function (formula, datasets,
   #External function
 
   #Importing functions
-  #' @importFrom mice is.mids as.mids complete
+  #' @importFrom mice is.mids complete
   #' @importFrom MatchIt matchit
   #' @importFrom stats as.formula
   mice::is.mids
-  mice::as.mids
   mice::complete
   MatchIt::matchit
   stats::as.formula
@@ -112,6 +113,7 @@ matchitmice <- function (formula, datasets,
       }
     }
     matcheddataset$.imp <- i
+    matcheddataset <- matcheddataset[order(matcheddataset$.id),]
 
     #Updating the lists
     matcheddatasetslist[i+1] <- list(matcheddataset)
@@ -120,7 +122,7 @@ matchitmice <- function (formula, datasets,
 
   #Binding the datasets
   matcheddatasets <- do.call("rbind", as.list(noquote(matcheddatasetslist)))
-  matcheddatasets <- as.mids(matcheddatasets)
+  matcheddatasets <- as2.mids(matcheddatasets)
 
   #Others
   matchedothers <- list(method)

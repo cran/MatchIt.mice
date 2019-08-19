@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{This argument specifies an object of the \code{mimids} class.}
 
-\item{n}{This argument specifies number of the matched imputed dataset intended to print its matching profile. The input must be a positive integer. The default is \code{1}.}
+\item{n}{This argument specifies the matched imputed dataset number, intended to print its matching profile. The input must be a positive integer. The default is \code{1}.}
 
 \item{digits}{This argument specifies minimal number of significant digits.}
 
@@ -46,3 +46,4 @@ Daniel Ho, Kosuke Imai, Gary King, and Elizabeth Stuart (2007). Matching as Nonp
 \author{
 Farhad Pishgar
 }
+\keyword{functions}

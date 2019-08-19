@@ -4,12 +4,16 @@
 #### Matching Multiply Imputed Datasets
 <!-- badges: end -->
 
-[![](https://img.shields.io/badge/CRAN%20version-2.0.2-orange.svg?color=yellow&style=for-the-badge)](https://cran.r-project.org/package=MatchIt.mice)
-[![](https://img.shields.io/badge/github%20version-2.0.2-orange.svg?color=yellow&style=for-the-badge)](https://github.com/FarhadPishgar/MatchIt.mice)
+[![](https://img.shields.io/badge/CRAN%20version-2.1.5-orange.svg?color=yellow&style=for-the-badge)](https://cran.r-project.org/package=MatchIt.mice)
+[![](https://img.shields.io/badge/github%20version-2.1.5-orange.svg?color=yellow&style=for-the-badge)](https://github.com/FarhadPishgar/MatchIt.mice)
 
 ## What's New
 
-![](https://img.shields.io/badge/version-2.0.2-orange.svg?color=yellow&style=for-the-badge)
+![](https://img.shields.io/badge/version-2.1.5-orange.svg?color=yellow&style=for-the-badge)
+
+The `mergeitmice()` function is now included in the package, which merges `mids`, `mimids`, and `wimids` objects with a dataframe. The `binditmice()` function is also updated to work with `mimids` and `wimids` objects. The `pool()` function is updated to produce more reliable results when numbers of observations in matched datasets are different. The `matchitmice()` function is also updated to sort results before returning them (as thus, `matchitmice.data()` function is also updated). Minor bugs are fixed.
+
+![](https://img.shields.io/badge/version-2.0.2-orange.svg?color=inactive&style=for-the-badge)
 
 Minor bugs are fixed.
 
@@ -23,7 +27,7 @@ The `README.md` and `DESCRIPTION` files are updated. The package is released on 
 
 ![](https://img.shields.io/badge/version-1.0.2-orange.svg?color=inactive&style=for-the-badge)
 
-Not so tiny bugs are fixed and the performance is improved.
+Not-so-tiny bugs are fixed and the performance is improved.
 
 ![](https://img.shields.io/badge/version-1.0.1-orange.svg?color=inactive&style=for-the-badge)
 

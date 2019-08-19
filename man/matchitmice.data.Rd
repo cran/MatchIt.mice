@@ -9,7 +9,7 @@ matchitmice.data(object, n = 1)
 \arguments{
 \item{object}{This argument specifies an object of the \code{mimids} class.}
 
-\item{n}{This argument specifies number of the matched imputed dataset intended to extract its matching data. The input must be a positive integer. The default is \code{1}.}
+\item{n}{This argument specifies the matched imputed dataset number, intended to extract its matching data. The input must be a positive integer. The default is \code{1}.}
 }
 \value{
 This function returns a subset of the imputed dataset sent to \code{matchitmice()} with just the matched individuals.
@@ -18,7 +18,7 @@ This function returns a subset of the imputed dataset sent to \code{matchitmice(
 The \code{matchitmice.data()} function extracts matching data from an object of the \code{mimids} class.
 }
 \details{
-The matched dataset of a \code{mimids} class object is extracted.
+The matched datasets wihtin the \code{mimids} class object are extracted.
 }
 \examples{
 \donttest{
@@ -47,3 +47,4 @@ Daniel Ho, Kosuke Imai, Gary King, and Elizabeth Stuart (2007). Matching as Nonp
 \author{
 Farhad Pishgar
 }
+\keyword{functions}

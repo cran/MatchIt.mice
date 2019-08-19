@@ -1,5 +1,7 @@
 #' @title Summarizes a \code{wimids} Class Object
 #'
+#' @keywords functions
+#'
 #' @aliases summary.wimids
 #'
 #' @rdname summary.wimids
@@ -7,7 +9,7 @@
 #' @method summary wimids
 #'
 #' @param object This argument specifies an object of the \code{wimids} class.
-#' @param n This argument specifies number of the weighted imputed dataset intended to summarize its matching profile. The input must be a positive integer. The default is \code{1}.
+#' @param n This argument specifies the weighted imputed dataset number, intended to summarize its matching profile. The input must be a positive integer. The default is \code{1}.
 #' @param interactions This argument specifies whether to show the balance of all squares and interactions of the covariates used in the weighting procedure. The input must be a logical value. The default is \code{FALSE}
 #' @param addlvariables This argument specifies whether to provide balance measures on additional variables not included in the original weighting procedure. The input should be a list. The default is \code{NULL}
 #' @param standardize This argument specifies whether to print out standardized versions of the balance measures, where the mean difference is standardized (divided) by the standard deviation in the original treated group. The input must be a logical value. The default is \code{FALSE}.
@@ -28,9 +30,7 @@
 #' @export
 #'
 #' @examples
-#'
 #' \donttest{
-#'
 #' #Loading the 'handoa' dataset
 #' data(handoa)
 #'
@@ -43,7 +43,6 @@
 #'
 #' #Summarizing data of the first imputed dataset
 #' summ1 <- summary(weighteddatasets, n = 1)
-#'
 #' }
 
 summary.wimids <- function(object, n = 1, interactions = FALSE, addlvariables = NULL,

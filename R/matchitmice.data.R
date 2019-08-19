@@ -1,15 +1,17 @@
 #' @title Outputs Matched Imputed Datasets
 #'
+#' @keywords functions
+#'
 #' @aliases matchitmice.data
 #'
 #' @rdname matchitmice.data
 #'
 #' @param object This argument specifies an object of the \code{mimids} class.
-#' @param n This argument specifies number of the matched imputed dataset intended to extract its matching data. The input must be a positive integer. The default is \code{1}.
+#' @param n This argument specifies the matched imputed dataset number, intended to extract its matching data. The input must be a positive integer. The default is \code{1}.
 #'
 #' @description The \code{matchitmice.data()} function extracts matching data from an object of the \code{mimids} class.
 #'
-#' @details The matched dataset of a \code{mimids} class object is extracted.
+#' @details The matched datasets wihtin the \code{mimids} class object are extracted.
 #'
 #' @return This function returns a subset of the imputed dataset sent to \code{matchitmice()} with just the matched individuals.
 #'
@@ -44,15 +46,15 @@ matchitmice.data <- function (object, n = 1) {
   #External function
 
   #Importing functions
-  #' @importFrom stats na.omit
-  stats::na.omit
+  #' @importFrom stats complete.cases
+  stats::complete.cases
   #' @export
 
   #Checking inputs format
   if(object[[1]]$m < n) {stop("The input for the 'n' is out of bounds.")}
 
   #Returning the output
-  output <- na.omit(object[[4]][[n + 1]])
+  output <- object[[4]][[n + 1]][complete.cases(object[[4]][[n + 1]][ , "weights"]),]
   return(output)
 }
 

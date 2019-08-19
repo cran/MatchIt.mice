@@ -9,7 +9,7 @@ pool(object, dfcom = NULL)
 \arguments{
 \item{object}{This argument specifies an object of the \code{mira} class (produced by a previous call to \code{with()} function) or a list with model fits.}
 
-\item{dfcom}{This argument specifies a positive number representing the degrees of freedom in the complete data analysis. The default is \code{NULL}, which means to extract this information from the first fitted model (when that fails the warning \code{Large sample assumed} is printed and the parameter is set to \code{999999}).}
+\item{dfcom}{This argument specifies a positive number representing the degrees of freedom in the complete data analysis. The default is \code{NULL}, which means to extract this information from the first fitted model or the fitted model with the lowest number of observations (when that fails the warning \code{Large sample assumed} is printed and the parameter is set to \code{999999}).}
 }
 \value{
 This function returns an object of the \code{mipo} class (multiple imputation pooled outcome).
@@ -56,5 +56,6 @@ Stef van Buuren and Karin Groothuis-Oudshoorn (2011). \code{mice}: Multivariate 
 \code{\link[=with]{with}}
 }
 \author{
-Extracted from the \pkg{mice} package written by Stef van Buuren et al.
+Extracted from the \pkg{mice} package written by Stef van Buuren et al. with few changes
 }
+\keyword{functions}

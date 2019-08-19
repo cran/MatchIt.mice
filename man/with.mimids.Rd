@@ -55,5 +55,6 @@ Stef van Buuren and Karin Groothuis-Oudshoorn (2011). \code{mice}: Multivariate 
 \code{\link[=matchitmice]{matchitmice}}
 }
 \author{
-Extracted from the \pkg{mice} package written by Stef van Buuren et al.
+Extracted from the \pkg{mice} package written by Stef van Buuren et al. with few changes
 }
+\keyword{functions}

@@ -1,11 +1,13 @@
 #' @title Combines Estimates by Rubin’s Rules
 #'
+#' @keywords functions
+#'
 #' @aliases pool
 #'
 #' @rdname pool
 #'
 #' @param object This argument specifies an object of the \code{mira} class (produced by a previous call to \code{with()} function) or a list with model fits.
-#' @param dfcom This argument specifies a positive number representing the degrees of freedom in the complete data analysis. The default is \code{NULL}, which means to extract this information from the first fitted model (when that fails the warning \code{Large sample assumed} is printed and the parameter is set to \code{999999}).
+#' @param dfcom This argument specifies a positive number representing the degrees of freedom in the complete data analysis. The default is \code{NULL}, which means to extract this information from the first fitted model or the fitted model with the lowest number of observations (when that fails the warning \code{Large sample assumed} is printed and the parameter is set to \code{999999}).
 #'
 #' @description The \code{pool()} function combines the estimates from \code{n} repeated complete data analyses. The typical sequence of steps to do a matching procedure or estimating weights of individuals of the imputed datasets are:
 #' \enumerate{
@@ -21,7 +23,7 @@
 #'
 #' @seealso \code{\link[=with]{with}}
 #'
-#' @author Extracted from the \pkg{mice} package written by Stef van Buuren et al.
+#' @author Extracted from the \pkg{mice} package written by Stef van Buuren et al. with few changes
 #'
 #' @references Stef van Buuren and Karin Groothuis-Oudshoorn (2011). \code{mice}: Multivariate Imputation by Chained Equations in \code{R}. \emph{Journal of Statistical Software}, 45(3): 1-67. \url{https://www.jstatsoft.org/v45/i03/}
 #'
@@ -60,12 +62,19 @@ pool <- function (object, dfcom = NULL) {
   #URL: <https://cran.r-project.org/web/packages/mice/mice.pdf>
   #URL: <https://www.jstatsoft.org/article/view/v045i03/v45i03.pdf>
   #Authors: Stef van Buuren et al.
-  #Changes: NA
+  #Changes: Few
 
   #Importing functions
   #' @importFrom mice pool
+  #' @importFrom mice getfit
+  #' @importFrom stats sd
   mice::pool
+  mice::getfit
+  stats::sd
   #' @export
+
+  #Handling unequal dfs
+  if (is.null(dfcom) & sd(summary(getfit(object), type = "glance")$df.residual) != 0) dfcom <- min(summary(getfit(object), type = "glance")$df.residual)
 
   #Returning output
   output <- mice::pool(object, dfcom = dfcom)

@@ -10,7 +10,7 @@
 \arguments{
 \item{object}{This argument specifies an object of the \code{mimids} class.}
 
-\item{n}{This argument specifies number of the matched imputed dataset intended to summarize its matching profile. The input must be a positive integer. The default is \code{1}.}
+\item{n}{This argument specifies the matched imputed dataset number, intended to summarize its matching profile. The input must be a positive integer. The default is \code{1}.}
 
 \item{interactions}{This argument specifies whether to show the balance of all squares and interactions of the covariates used in the matching procedure (for nearest neighbor matching method). The input must be a logical value. The default is \code{FALSE}}
 
@@ -53,3 +53,4 @@ Daniel Ho, Kosuke Imai, Gary King, and Elizabeth Stuart (2007). Matching as Nonp
 \author{
 Farhad Pishgar
 }
+\keyword{functions}

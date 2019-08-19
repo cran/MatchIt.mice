@@ -14,7 +14,6 @@
   \item{HANDUSE}{The hand use habits of each individual, coded as \code{0} (not lifting heavy objects regularly) and \code{1} (lifting heavy objects regularly);}
   \item{KNEEOA}{Diagnosis of knee osteoarthritis, coded as \code{0} (not affected) and \code{1} (affected); and}
   \item{HANDOA}{Diagnosis of hand osteoarthritis, coded as \code{0} (not affected) and \code{1} (affected).}
-  ...
 
 }}
 \source{

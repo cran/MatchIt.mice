@@ -1,5 +1,7 @@
 #' @title Plots a \code{mimids} Class Object
 #'
+#' @keywords functions
+#'
 #' @aliases plot.mimids
 #'
 #' @rdname plot.mimids
@@ -7,7 +9,7 @@
 #' @method plot mimids
 #'
 #' @param x This argument specifies an object of the \code{mimids} class.
-#' @param n This argument specifies number of the matched imputed dataset intended to plot its matching profile. The input must be a positive integer. The default is \code{1}.
+#' @param n This argument specifies the matched imputed dataset number, intended to plot its matching profile. The input must be a positive integer. The default is \code{1}.
 #' @param type This argument specifies type of the plot. Currently, \code{"QQ"} (the empirical quantile-quantile plots of each covariate to check balance of marginal distributions), \code{"jitter"} (the jitter plots of the propensity score for control and treatment individuals), and \code{"hist"} (the histograms of the propensity score in the original control and treatment groups and weighted histograms of the propensity score in the matched control and treatment groups) types are available. The default is \code{"QQ"}.
 #' @param discrete.cutoff This argument specifies number of values of covariates that are jittered for visibility (for quantile-quantile plots). The input must be a positive integer. The default is \code{5}, meaning that discrete covariates that take 5 or fewer values are jittered.
 #' @param numdraws This argument specifies number of observations that are sampled for plotting full or ratio matching (using weights). The input must be a positive integer. The default is \code{5000}.

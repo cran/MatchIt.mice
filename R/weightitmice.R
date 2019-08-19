@@ -1,6 +1,8 @@
 #' @title Weights Multiply Imputed Datasets
 #'
-#' @aliases weightitmice WeightItmice WeightItMICE weightit.mice WeightIt.mice WeightIt.MICE
+#' @keywords functions
+#'
+#' @aliases weightitmice
 #'
 #' @rdname weightitmice
 #'
@@ -34,10 +36,6 @@
 #' \donttest{
 #' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
 #'
-#' #Loading the packages
-#' library(mice)
-#' library(MatchIt.mice)
-#'
 #' #Loading the 'handoa' dataset
 #' data(handoa)
 #'
@@ -57,11 +55,10 @@ weightitmice <- function (formula, datasets,
 
 
   #Importing functions
-  #' @importFrom mice is.mids as.mids complete
+  #' @importFrom mice is.mids complete
   #' @importFrom MatchIt matchit
   #' @importFrom stats as.formula terms
   mice::is.mids
-  mice::as.mids
   mice::complete
   MatchIt::matchit
   stats::as.formula
@@ -123,7 +120,7 @@ weightitmice <- function (formula, datasets,
 
   #Binding the datasets
   weighteddatasets <- do.call("rbind", as.list(noquote(weighteddatasetslist)))
-  weighteddatasets <- as.mids(weighteddatasets)
+  weighteddatasets <- as2.mids(weighteddatasets)
 
   #Others
   weightedothers <- list(method)

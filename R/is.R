@@ -1,5 +1,7 @@
 #' @title Checks for the \code{mimids} Class
 #'
+#' @keywords functions
+#'
 #' @aliases is.mimids
 #'
 #' @rdname is.mimids
@@ -50,11 +52,13 @@ is.mimids <- function(object) {
 
 #' @title Checks for the \code{wimids} Class
 #'
+#' @keywords functions
+#'
 #' @aliases is.wimids
 #'
 #' @rdname is.wimids
 #'
-#' @param object This aargument specifies the object that should be checked to see if is of the \code{wimids} class or not.
+#' @param object This argument specifies the object that should be checked to see if is of the \code{wimids} class or not.
 #'
 #' @description The \code{is.wimids()} function checks whether class of objects are \code{wimids} or not.
 #'

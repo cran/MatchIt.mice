@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{This argument specifies an object of the \code{mimids} class.}
 
-\item{n}{This argument specifies number of the matched imputed dataset intended to plot its matching profile. The input must be a positive integer. The default is \code{1}.}
+\item{n}{This argument specifies the matched imputed dataset number, intended to plot its matching profile. The input must be a positive integer. The default is \code{1}.}
 
 \item{type}{This argument specifies type of the plot. Currently, \code{"QQ"} (the empirical quantile-quantile plots of each covariate to check balance of marginal distributions), \code{"jitter"} (the jitter plots of the propensity score for control and treatment individuals), and \code{"hist"} (the histograms of the propensity score in the original control and treatment groups and weighted histograms of the propensity score in the matched control and treatment groups) types are available. The default is \code{"QQ"}.}
 
@@ -55,3 +55,4 @@ Daniel Ho, Kosuke Imai, Gary King, and Elizabeth Stuart (2007). Matching as Nonp
 \author{
 Farhad Pishgar
 }
+\keyword{functions}

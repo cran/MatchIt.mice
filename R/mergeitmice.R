@@ -1,23 +1,24 @@
-#' @title Binds Imputed Datasets and Dataframes
+#' @title Merges Imputed Datasets with Dataframes
 #'
 #' @keywords functions
 #'
-#' @aliases binditmice
+#' @aliases mergeitmice
 #'
-#' @rdname binditmice
+#' @rdname mergeitmice
 #'
 #' @param datasets This argument specifies an object of the \code{mids}, \code{mimids}, or \code{wimids} class.
-#' @param data This argument specifies a dataframe.
+#' @param data This argument specifies a data frame.
+#' @param by This argument specifies a variable name, present in bot \code{datasets} and \code{data}.
 #'
-#' @description The \code{binditmice()} function binds a dataframe to each imputed dataset of the \code{mids}, \code{mimids}, or \code{wimids} class objects in a row-wise fashion.
+#' @description The \code{mergeitmice()} function merges a dataframe with each imputed dataset of the \code{mids}, \code{mimids}, or \code{wimids} class objects based on the variables passed to the function as \code{by}.
 #'
 #' @details This functions can be used instead of the \code{cbind()} function (from the \pkg{mice} package).
 #'
-#' @return This function returns an object of the \code{mids}, \code{mimids}, or \code{wimids} class after binding a dataframe to each imputed dataset of the inputted object.
+#' @return This function returns an object of the \code{mids}, \code{mimids}, or \code{wimids} class after merging a dataframe with each imputed dataset of the inputted object.
 #'
-#' @seealso  \code{\link[=matchitmice]{matchitmice}}
-#' @seealso  \code{\link[=weightitmice]{weightitmice}}
-#' @seealso  \code{\link[=mergeitmice]{mergeitmice}}
+#' @seealso \code{\link[=matchitmice]{matchitmice}}
+#' @seealso \code{\link[=weightitmice]{weightitmice}}
+#' @seealso \code{\link[=binditmice]{binditmice}}
 #'
 #' @author Farhad Pishgar
 #'
@@ -31,17 +32,17 @@
 #'
 #' #Loading and preparing the 'handoa' dataset
 #' data(handoa)
-#' idenoa <- handoa["ID"]
-#' handoa <- handoa[c("AGE", "SEX", "BMI", "SMOKING", "HANDUSE", "KNEEOA", "HANDOA")]
+#' idenoa <- handoa["ID", "HANDOA"]
+#' handoa <- handoa[c("ID", "AGE", "SEX", "BMI", "SMOKING", "HANDUSE", "KNEEOA")]
 #'
 #' #Imputing the missing data points in the'handoa' dataset
 #' datasets <- mice(handoa, m = 5, maxit = 10)
 #'
-#' #Binding the dataframe, 'idenoa', to each imputed dataset of the 'datasets' object
-#' datasets <- binditmice(datasets, idenoa)
+#' #Merging the dataframe, 'idenoa', with each imputed dataset of the 'datasets' object
+#' datasets <- mergeitmice(datasets, idenoa, by = "ID")
 #' }
 
-binditmice <- function(datasets, data) {
+mergeitmice <- function(datasets, data, by = "ID") {
 
   #External function
 
@@ -62,18 +63,19 @@ binditmice <- function(datasets, data) {
     data.0 <- datasets$data
     data.0$.id <- 1:nrow(datasets$data)
     data.0$.imp <- 0
-    data.0 <- cbind(data.0, data)
+    data.0 <- merge(data.0, data, by = by, all.x = TRUE, all.y = FALSE)
 
     #Preparing the list
     datasetlist <- list(0)
     datasetlist[[1]] <- data.0
 
-    #Binding
+
+    #Merging
     for (i in 1:datasets$m) {
       data.i <- complete(datasets, i)
       data.i$.id <- 1:nrow(datasets$data)
       data.i$.imp <- i
-      data.i <- cbind(data.i, data)
+      data.i <- merge(data.i, data, by = by, all.x = TRUE, all.y = FALSE)
       datasetlist[[i+1]] <- data.i
     }
 
@@ -81,42 +83,43 @@ binditmice <- function(datasets, data) {
     comdatasets <- do.call("rbind", as.list(noquote(datasetlist)))
     newdatasets <- as2.mids(comdatasets)
     return(newdatasets)
+
+    }
+
+  if (is.mimids(datasets)) {
+    #Polishing variables
+    matchingmodelslist <- datasets[[2]]
+    matchedothers <- datasets[[3]]
+    datasets <- datasets[[1]]
+
+    data.0 <- datasets$data
+    data.0$.id <- 1:nrow(datasets$data)
+    data.0$.imp <- 0
+    data.0 <- merge(data.0, data, by = by, all.x = TRUE, all.y = FALSE)
+
+    #Preparing the list
+    datasetlist <- list(0)
+    datasetlist[[1]] <- data.0
+
+    #Merging
+    for (i in 1:datasets$m) {
+      data.i <- complete(datasets, i)
+      data.i$.id <- 1:nrow(datasets$data)
+      data.i$.imp <- i
+      data.i <- merge(data.i, data, by = by, all.x = TRUE, all.y = FALSE)
+      datasetlist[[i+1]] <- data.i
+    }
+
+    #Prepating the output
+    comdatasets <- do.call("rbind", as.list(noquote(datasetlist)))
+    newdatasets <- as2.mids(comdatasets)
+
+    #Returning output
+    output <- list(newdatasets, matchingmodelslist, matchedothers, datasetlist)
+    class(output) <- "mimids"
+    return(output)
+
   }
-
-if (is.mimids(datasets)) {
-  #Polishing variables
-  matchingmodelslist <- datasets[[2]]
-  matchedothers <- datasets[[3]]
-  datasets <- datasets[[1]]
-
-  data.0 <- datasets$data
-  data.0$.id <- 1:nrow(datasets$data)
-  data.0$.imp <- 0
-  data.0 <- cbind(data.0, data)
-
-  #Preparing the list
-  datasetlist <- list(0)
-  datasetlist[[1]] <- data.0
-
-  #Binding
-  for (i in 1:datasets$m) {
-    data.i <- complete(datasets, i)
-    data.i$.id <- 1:nrow(datasets$data)
-    data.i$.imp <- i
-    data.i <- cbind(data.i, data)
-    datasetlist[[i+1]] <- data.i
-  }
-
-  #Prepating the output
-  comdatasets <- do.call("rbind", as.list(noquote(datasetlist)))
-  newdatasets <- as2.mids(comdatasets)
-
-  #Returning output
-  output <- list(newdatasets, matchingmodelslist, matchedothers, datasetlist)
-  class(output) <- "mimids"
-  return(output)
-
-}
 
   if (is.wimids(datasets)) {
     #Polishing variables
@@ -127,7 +130,7 @@ if (is.mimids(datasets)) {
     data.0 <- datasets$data
     data.0$.id <- 1:nrow(datasets$data)
     data.0$.imp <- 0
-    data.0 <- cbind(data.0, data)
+    data.0 <- merge(data.0, data, by = by, all.x = TRUE, all.y = FALSE)
 
     #Preparing the list
     datasetlist <- list(0)
@@ -138,7 +141,7 @@ if (is.mimids(datasets)) {
       data.i <- complete(datasets, i)
       data.i$.id <- 1:nrow(datasets$data)
       data.i$.imp <- i
-      data.i <- cbind(data.i, data)
+      data.i <- merge(data.i, data, by = by, all.x = TRUE, all.y = FALSE)
       datasetlist[[i+1]] <- data.i
     }
 

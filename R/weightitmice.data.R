@@ -1,15 +1,17 @@
 #' @title Outputs Weighted Imputed Datasets
 #'
+#' @keywords functions
+#'
 #' @aliases weightitmice.data
 #'
 #' @rdname weightitmice.data
 #'
 #' @param object This argument specifies an object of the \code{wimids} class.
-#' @param n This argument specifies number of the weighted imputed dataset intended to extract its data. The input must be a positive integer. The default is \code{1}.
+#' @param n This argument specifies the weighted imputed dataset number, intended to extract its data. The input must be a positive integer. The default is \code{1}.
 #'
 #' @description The \code{weightitmice.data()} function extracts data from an object of the \code{wimids} class.
 #'
-#' @details The weighted dataset of a \code{wimids} class object is extracted.
+#' @details The weighted datasets within the \code{wimids} class object are extracted.
 #'
 #' @return This function returns the imputed dataset sent to \code{weightitmice()} with weights of individuals of the datasets added (listed as the \code{inverse.weights} variables).
 #'
@@ -43,11 +45,16 @@ weightitmice.data <- function (object, n = 1) {
 
   #External function
 
+  #Importing functions
+  #' @importFrom stats complete.cases
+  stats::complete.cases
+  #' @export
+
   #Checking inputs format
   if(object[[1]]$m < n) {stop("The input for the 'n' is out of bounds.")}
 
   #Returning the output
-  output <- object[[4]][[n + 1]]
+  output <- object[[4]][[n + 1]][complete.cases(object[[4]][[n + 1]][ , "weights"]),]
   return(output)
 }
 

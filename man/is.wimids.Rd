@@ -7,7 +7,7 @@
 is.wimids(object)
 }
 \arguments{
-\item{object}{This aargument specifies the object that should be checked to see if is of the \code{wimids} class or not.}
+\item{object}{This argument specifies the object that should be checked to see if is of the \code{wimids} class or not.}
 }
 \value{
 This function returns a logical value indicating whether \code{object} is of the \code{wimids} class.
@@ -43,3 +43,4 @@ is(weighteddatasets)
 \author{
 Farhad Pishgar
 }
+\keyword{functions}
