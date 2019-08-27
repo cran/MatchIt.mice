@@ -1,13 +1,13 @@
 #' @title Merges Imputed Datasets with Dataframes
 #'
-#' @keywords functions
+#' @keywords function
 #'
 #' @aliases mergeitmice
 #'
 #' @rdname mergeitmice
 #'
 #' @param datasets This argument specifies an object of the \code{mids}, \code{mimids}, or \code{wimids} class.
-#' @param data This argument specifies a data frame.
+#' @param data This argument specifies a dataframe.
 #' @param by This argument specifies a variable name, present in bot \code{datasets} and \code{data}.
 #'
 #' @description The \code{mergeitmice()} function merges a dataframe with each imputed dataset of the \code{mids}, \code{mimids}, or \code{wimids} class objects based on the variables passed to the function as \code{by}.
@@ -28,18 +28,20 @@
 #'
 #' @examples
 #' \donttest{
-#' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
+#' #Loading the 'dt.osa' and 'dt.osp' datasets
+#' data(dt.osa)
+#' data(dt.osp)
 #'
-#' #Loading and preparing the 'handoa' dataset
-#' data(handoa)
-#' idenoa <- handoa["ID", "HANDOA"]
-#' handoa <- handoa[c("ID", "AGE", "SEX", "BMI", "SMOKING", "HANDUSE", "KNEEOA")]
+#' #Imputing missing data points in the'dt.osa' dataset
+#' datasets <- mice(dt.osa, m = 5, maxit = 1,
+#'                  method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 #'
-#' #Imputing the missing data points in the'handoa' dataset
-#' datasets <- mice(handoa, m = 5, maxit = 10)
+#' #Matching the imputed datasets, 'datasets'
+#' matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+#'                                approach = 'within', method = 'exact')
 #'
-#' #Merging the dataframe, 'idenoa', with each imputed dataset of the 'datasets' object
-#' datasets <- mergeitmice(datasets, idenoa, by = "ID")
+#' #Merging the dataframe, 'dt.osp', with each imputed dataset of the 'matcheddatasets' object
+#' matcheddatasets <- mergeitmice(matcheddatasets, dt.osp, by = "IDN")
 #' }
 
 mergeitmice <- function(datasets, data, by = "ID") {

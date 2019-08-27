@@ -20,15 +20,16 @@ The class of objects are checked to be of the \code{mimids}.
 }
 \examples{
 \donttest{
-#Loading the 'handoa' dataset
-data(handoa)
+#Loading the 'dt.osa' dataset
+data(dt.osa)
 
-#Imputing the missing data points in the 'handoa' dataset
-datasets <- mice(handoa, m = 5, maxit = 1,
-                 method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#Imputing missing data points in the'dt.osa' dataset
+datasets <- mice(dt.osa, m = 5, maxit = 1,
+                 method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 
-#Matching the imputed datasets, 'datasets', using the 'exact' matching method
-matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets, method = "exact")
+#Matching the imputed datasets, 'datasets'
+matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+                               approach = 'within', method = 'exact')
 
 #Checking the 'matcheddatasets' object
 is.mimids(matcheddatasets)
@@ -43,4 +44,4 @@ is(matcheddatasets)
 \author{
 Farhad Pishgar
 }
-\keyword{functions}
+\keyword{function}

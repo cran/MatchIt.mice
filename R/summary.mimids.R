@@ -1,6 +1,6 @@
 #' @title Summarizes a \code{mimids} Class Object
 #'
-#' @keywords functions
+#' @keywords function
 #'
 #' @aliases summary.mimids
 #'
@@ -32,18 +32,19 @@
 #'
 #' @examples
 #' \donttest{
-#' #Loading the 'handoa' dataset
-#' data(handoa)
+#' #Loading the 'dt.osa' dataset
+#' data(dt.osa)
 #'
-#' #Imputing the missing data points in the 'handoa' dataset
-#' datasets <- mice(handoa, m = 5, maxit = 1,
-#'                  method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#' #Imputing missing data points in the'dt.osa' dataset
+#' datasets <- mice(dt.osa, m = 5, maxit = 1,
+#'                  method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 #'
 #' #Matching the imputed datasets, 'datasets'
-#' matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets)
+#' matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+#'                                approach = 'within', method = 'exact')
 #'
 #' #Summarizing data of the first imputed dataset
-#' summ1 <- summary(matcheddatasets, n = 1)
+#' summary.1 <- summary(matcheddatasets, n = 1)
 #' }
 
 summary.mimids <- function(object, n = 1, interactions = FALSE, addlvariables = NULL,
@@ -83,7 +84,6 @@ summary.mimids <- function(object, n = 1, interactions = FALSE, addlvariables = 
     print(summary(object[[2]][[n + 1]], interactions = interactions, addlvariables = addlvariables, standardize = standardize)[[5]])
     cat("\nSample sizes:", "\n", sep = "")
     print(summary(object[[2]][[n + 1]], interactions = interactions, addlvariables = addlvariables, standardize = standardize)[[2]])
-
   }
 }
 

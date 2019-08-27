@@ -30,22 +30,25 @@ The \code{with()} performs a computation on each of the imputed datasets.
 }
 \examples{
 \donttest{
-#Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
+#Loading the 'dt.osa' and 'dt.osp' datasets
+data(dt.osa)
+data(dt.osp)
 
-#Loading the 'handoa' dataset
-data(handoa)
-
-#Imputing the missing data points in the 'handoa' dataset
-datasets <- mice(handoa, m = 5, maxit = 1,
-                 method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#Imputing missing data points in the'dt.osa' dataset
+datasets <- mice(dt.osa, m = 5, maxit = 1,
+                 method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 
 #Matching the imputed datasets, 'datasets'
-matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets)
+matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+                               approach = 'within', method = 'exact')
+
+#Merging the dataframe, 'dt.osp', with each imputed dataset of the 'matcheddatasets' object
+matcheddatasets <- mergeitmice(matcheddatasets, dt.osp, by = "IDN")
 
 #Analyzing the imputed datasets
-results <- with(data = matcheddatasets,
-                exp = glm(HANDOA ~ SMOKING,
-                          na.action = na.omit, family = binomial))
+models <- with(data = matcheddatasets,
+               exp = glm(KOA ~ PTH,
+                         na.action = na.omit, family = binomial))
 }
 }
 \references{
@@ -57,4 +60,4 @@ Stef van Buuren and Karin Groothuis-Oudshoorn (2011). \code{mice}: Multivariate 
 \author{
 Extracted from the \pkg{mice} package written by Stef van Buuren et al. with few changes
 }
-\keyword{functions}
+\keyword{function}

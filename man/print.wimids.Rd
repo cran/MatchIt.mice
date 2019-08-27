@@ -23,18 +23,19 @@ The matching profile of the \code{wimids} class objects is printed.
 }
 \examples{
 \donttest{
-#Loading the 'handoa' dataset
-data(handoa)
+#Loading the 'dt.osa' dataset
+data(dt.osa)
 
-#Imputing the missing data points in the 'handoa' dataset
-datasets <- mice(handoa, m = 5, maxit = 1,
-                 method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#Imputing missing data points in the'dt.osa' dataset
+datasets <- mice(dt.osa, m = 5, maxit = 1,
+                 method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 
 #Weighting the imputed datasets, 'datasets'
-weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
+weighteddatasets <- weightitmice(KOA ~ SEX + AGE + SMK, datasets,
+                                 approach = 'within', method = 'nearest')
 
 #Printing data of the first imputed dataset
-print1 <- print(weighteddatasets, n = 1)
+print.1 <- print(weighteddatasets, n = 1)
 }
 }
 \references{
@@ -46,4 +47,5 @@ Daniel Ho, Kosuke Imai, Gary King, and Elizabeth Stuart (2007). Matching as Nonp
 \author{
 Farhad Pishgar
 }
+\keyword{function}
 \keyword{functions}

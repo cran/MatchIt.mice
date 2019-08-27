@@ -22,18 +22,20 @@ This functions can be used instead of the \code{cbind()} function (from the \pkg
 }
 \examples{
 \donttest{
-#Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
+#Loading the 'dt.osa' and 'dt.osp' datasets
+data(dt.osa)
+data(dt.osp)
 
-#Loading and preparing the 'handoa' dataset
-data(handoa)
-idenoa <- handoa["ID"]
-handoa <- handoa[c("AGE", "SEX", "BMI", "SMOKING", "HANDUSE", "KNEEOA", "HANDOA")]
+#Imputing missing data points in the'dt.osa' dataset
+datasets <- mice(dt.osa, m = 5, maxit = 1,
+                 method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 
-#Imputing the missing data points in the'handoa' dataset
-datasets <- mice(handoa, m = 5, maxit = 10)
+#Matching the imputed datasets, 'datasets'
+matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+                               approach = 'within', method = 'exact')
 
-#Binding the dataframe, 'idenoa', to each imputed dataset of the 'datasets' object
-datasets <- binditmice(datasets, idenoa)
+#Binding the dataframe, 'dt.osp', to each imputed dataset of the 'matcheddatasets' object
+matcheddatasets <- binditmice(matcheddatasets, dt.osp)
 }
 }
 \references{
@@ -49,4 +51,4 @@ Stef van Buuren and Karin Groothuis-Oudshoorn (2011). \code{mice}: Multivariate 
 \author{
 Farhad Pishgar
 }
-\keyword{functions}
+\keyword{function}

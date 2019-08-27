@@ -1,6 +1,6 @@
 #' @title Checks for the \code{mimids} Class
 #'
-#' @keywords functions
+#' @keywords function
 #'
 #' @aliases is.mimids
 #'
@@ -23,15 +23,16 @@
 #'
 #' @examples
 #' \donttest{
-#' #Loading the 'handoa' dataset
-#' data(handoa)
+#' #Loading the 'dt.osa' dataset
+#' data(dt.osa)
 #'
-#' #Imputing the missing data points in the 'handoa' dataset
-#' datasets <- mice(handoa, m = 5, maxit = 1,
-#'                  method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#' #Imputing missing data points in the'dt.osa' dataset
+#' datasets <- mice(dt.osa, m = 5, maxit = 1,
+#'                  method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 #'
-#' #Matching the imputed datasets, 'datasets', using the 'exact' matching method
-#' matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets, method = "exact")
+#' #Matching the imputed datasets, 'datasets'
+#' matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+#'                                approach = 'within', method = 'exact')
 #'
 #' #Checking the 'matcheddatasets' object
 #' is.mimids(matcheddatasets)
@@ -49,10 +50,9 @@ is.mimids <- function(object) {
   return(output)
 }
 
-
 #' @title Checks for the \code{wimids} Class
 #'
-#' @keywords functions
+#' @keywords function
 #'
 #' @aliases is.wimids
 #'
@@ -75,15 +75,16 @@ is.mimids <- function(object) {
 #'
 #' @examples
 #' \donttest{
-#' #Loading the 'handoa' dataset
-#' data(handoa)
+#' #Loading the 'dt.osa' dataset
+#' data(dt.osa)
 #'
-#' #Imputing the missing data points in the 'handoa' dataset
-#' datasets <- mice(handoa, m = 5, maxit = 1,
-#'                  method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#' #Imputing missing data points in the'dt.osa' dataset
+#' datasets <- mice(dt.osa, m = 5, maxit = 1,
+#'                  method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 #'
 #' #Weighting the imputed datasets, 'datasets'
-#' weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
+#' weighteddatasets <- weightitmice(KOA ~ SEX + AGE + SMK, datasets,
+#'                                  approach = 'within', method = 'nearest')
 #'
 #' #Checking the 'weighteddatasets' object
 #' is.wimids(weighteddatasets)

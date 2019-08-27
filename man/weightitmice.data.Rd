@@ -12,7 +12,7 @@ weightitmice.data(object, n = 1)
 \item{n}{This argument specifies the weighted imputed dataset number, intended to extract its data. The input must be a positive integer. The default is \code{1}.}
 }
 \value{
-This function returns the imputed dataset sent to \code{weightitmice()} with weights of individuals of the datasets added (listed as the \code{inverse.weights} variables).
+This function returns the imputed dataset after weighting with weights of observations included in the dataset (listed as the \code{inverse.weights} variables).
 }
 \description{
 The \code{weightitmice.data()} function extracts data from an object of the \code{wimids} class.
@@ -22,20 +22,19 @@ The weighted datasets within the \code{wimids} class object are extracted.
 }
 \examples{
 \donttest{
-#Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
+#Loading the 'dt.osa' dataset
+data(dt.osa)
 
-#Loading the 'handoa' dataset
-data(handoa)
-
-#Imputing the missing data points in the 'handoa' dataset
-datasets <- mice(handoa, m = 5, maxit = 1,
-                 method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#Imputing missing data points in the'dt.osa' dataset
+datasets <- mice(dt.osa, m = 5, maxit = 1,
+                 method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 
 #Weighting the imputed datasets, 'datasets'
-weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
+weighteddatasets <- weightitmice(KOA ~ SEX + AGE + SMK, datasets,
+                                 approach = 'within', method = 'nearest')
 
 #Extracting data of the first imputed dataset
-data1 <- weightitmice.data(weighteddatasets, n = 1)
+data.1 <- weightitmice.data(weighteddatasets, n = 1)
 }
 }
 \references{
@@ -47,4 +46,4 @@ Daniel Ho, Kosuke Imai, Gary King, and Elizabeth Stuart (2007). Matching as Nonp
 \author{
 Farhad Pishgar
 }
-\keyword{functions}
+\keyword{function}

@@ -15,10 +15,10 @@ pool(object, dfcom = NULL)
 This function returns an object of the \code{mipo} class (multiple imputation pooled outcome).
 }
 \description{
-The \code{pool()} function combines the estimates from \code{n} repeated complete data analyses. The typical sequence of steps to do a matching procedure or estimating weights of individuals of the imputed datasets are:
+The \code{pool()} function combines the estimates from \code{n} repeated complete data analyses. The typical sequence of steps to do a matching procedure or estimating weights of observations of the imputed datasets are:
 \enumerate{
  \item Impute the missing data points by the \code{mice} function (from the \pkg{mice} package), resulting in a multiple imputed dataset (an object of the \code{mids} class);
- \item Match each imputed dataset using a matching model by the \code{matchitmice()} function, resulting in an object of the \code{mimids} class or estimate weights of individuals in the imputed datasets by the \code{weightitmice()} function, resulting in an object of the \code{wimids} class;
+ \item Match each imputed dataset using a matching model by the \code{matchitmice()} function, resulting in an object of the \code{mimids} class or estimate weights of observations in the imputed datasets by the \code{weightitmice()} function, resulting in an object of the \code{wimids} class;
  \item Fit the model of interest (scientific model) on each matched or weighted dataset by the \code{with()} function, resulting in an object of the \code{mira} class;
  \item Pool the estimates from each model into a single set of estimates and standard errors, resulting in an object of the \code{mipo} class.
 }
@@ -28,25 +28,28 @@ The \code{pool()} function averages the estimates of the complete data model and
 }
 \examples{
 \donttest{
-#Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
+#Loading the 'dt.osa' and 'dt.osp' datasets
+data(dt.osa)
+data(dt.osp)
 
-#Loading the 'handoa' dataset
-data(handoa)
-
-#Imputing the missing data points in the 'handoa' dataset
-datasets <- mice(handoa, m = 5, maxit = 1,
-                 method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#Imputing missing data points in the'dt.osa' dataset
+datasets <- mice(dt.osa, m = 5, maxit = 1,
+                 method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 
 #Matching the imputed datasets, 'datasets'
-matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets)
+matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+                               approach = 'within', method = 'exact')
+
+#Merging the dataframe, 'dt.osp', with each imputed dataset of the 'matcheddatasets' object
+matcheddatasets <- mergeitmice(matcheddatasets, dt.osp, by = "IDN")
 
 #Analyzing the imputed datasets
-results <- with(data = matcheddatasets,
-                exp = glm(HANDOA ~ SMOKING,
-                          na.action = na.omit, family = binomial))
+models <- with(data = matcheddatasets,
+               exp = glm(KOA ~ PTH,
+                         na.action = na.omit, family = binomial))
 
 #Printing pooled results
-print(pool(results))
+results <- pool(models)
 }
 }
 \references{
@@ -58,4 +61,4 @@ Stef van Buuren and Karin Groothuis-Oudshoorn (2011). \code{mice}: Multivariate 
 \author{
 Extracted from the \pkg{mice} package written by Stef van Buuren et al. with few changes
 }
-\keyword{functions}
+\keyword{function}

@@ -1,6 +1,6 @@
 #' @title Prints a \code{mimids} Class Object
 #'
-#' @keywords functions
+#' @keywords function
 #'
 #' @aliases print.mimids
 #'
@@ -29,18 +29,19 @@
 #'
 #' @examples
 #' \donttest{
-#' #Loading the 'handoa' dataset
-#' data(handoa)
+#' #Loading the 'dt.osa' dataset
+#' data(dt.osa)
 #'
-#' #Imputing the missing data points in the 'handoa' dataset
-#' datasets <- mice(handoa, m = 5, maxit = 1,
-#'                  method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#' #Imputing missing data points in the'dt.osa' dataset
+#' datasets <- mice(dt.osa, m = 5, maxit = 1,
+#'                  method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 #'
 #' #Matching the imputed datasets, 'datasets'
-#' matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets)
+#' matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+#'                                approach = 'within', method = 'exact')
 #'
 #' #Printing data of the first imputed dataset
-#' print1 <- print(matcheddatasets, n = 1)
+#' print.1 <- print(matcheddatasets, n = 1)
 #' }
 
 print.mimids <- function(x, n = 1, digits = getOption("digits"), ...) {
@@ -65,5 +66,4 @@ print.mimids <- function(x, n = 1, digits = getOption("digits"), ...) {
 
   #Printing
   print(x[[2]][[n + 1]]$nn)
-
 }

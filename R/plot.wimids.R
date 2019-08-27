@@ -1,6 +1,6 @@
 #' @title Plots a \code{wimids} Class Object
 #'
-#' @keywords functions
+#' @keywords function
 #'
 #' @aliases plot.wimids
 #'
@@ -10,10 +10,10 @@
 #'
 #' @param x This argument specifies an object of the \code{wimids} class.
 #' @param n This argument specifies the weighted imputed dataset number, intended to plot its matching profile. The input must be a positive integer. The default is \code{1}.
-#' @param type This argument specifies type of the plot. Currently, \code{"QQ"} (the empirical quantile-quantile plots of each covariate to check balance of marginal distributions), \code{"jitter"} (the jitter plots of the propensity score for control and treatment individuals), and \code{"hist"} (the histograms of the propensity score in the original control and treatment groups) types are available. The default is \code{"QQ"}.
+#' @param type This argument specifies type of the plot. Currently, \code{"QQ"} (the empirical quantile-quantile plots of each covariate to check balance of marginal distributions), \code{"jitter"} (the jitter plots of the propensity score for control and treatment observations), and \code{"hist"} (the histograms of the propensity score in the original control and treatment groups) types are available. The default is \code{"QQ"}.
 #' @param discrete.cutoff This argument specifies number of values of covariates that are jittered for visibility (for quantile-quantile plots). The input must be a positive integer. The default is \code{5}, meaning that discrete covariates that take 5 or fewer values are jittered.
 #' @param numdraws This argument specifies number of observations that are sampled for plotting full or ratio matching (using weights). The input must be a positive integer. The default is \code{5000}.
-#' @param interactive This argument specifies whether users can identify individuals by clicking on the graph with the left mouse button and (when applicable) choose subclasses to plot. The input must be a logical value. The default is \code{TRUE}.
+#' @param interactive This argument specifies whether users can identify observations by clicking on the graph with the left mouse button and (when applicable) choose subclasses to plot. The input must be a logical value. The default is \code{TRUE}.
 #' @param which.xs This argument specifies particular covariate names in a character vector to plot only a subset of the covariates (for quantile-quantile plots). The default is \code{"NULL"}.
 #' @param ... Additional arguments to be passed to the \code{plot.wimids()} function.
 #'
@@ -33,18 +33,19 @@
 #'
 #' @examples
 #' \donttest{
-#' #Loading the 'handoa' dataset
-#' data(handoa)
+#' #Loading the 'dt.osa' dataset
+#' data(dt.osa)
 #'
-#' #Imputing the missing data points in the 'handoa' dataset
-#' datasets <- mice(handoa, m = 5, maxit = 1,
-#'                  method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#' #Imputing missing data points in the'dt.osa' dataset
+#' datasets <- mice(dt.osa, m = 5, maxit = 1,
+#'                  method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 #'
 #' #Weighting the imputed datasets, 'datasets'
-#' weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
+#' weighteddatasets <- weightitmice(KOA ~ SEX + AGE + SMK, datasets,
+#'                                  approach = 'within', method = 'nearest')
 #'
 #' #Plotting data of the first imputed dataset
-#' plot1 <- plot(weighteddatasets, n = 1)
+#' plot.1 <- plot(weighteddatasets, n = 1)
 #' }
 
 plot.wimids <- function(x, n = 1, type = "QQ", discrete.cutoff = 5,
@@ -77,5 +78,4 @@ plot.wimids <- function(x, n = 1, type = "QQ", discrete.cutoff = 5,
   #Plotting
   plot(model, discrete.cutoff = discrete.cutoff, type = type,
        numdraws = numdraws, interactive = interactive, which.xs = which.xs, ...)
-
 }

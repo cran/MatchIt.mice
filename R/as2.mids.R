@@ -61,6 +61,5 @@ as2.mids <- function(long, where = NULL, .imp = ".imp", .id = ".id") {
       }
     }
   }
-
   return(ini)
 }

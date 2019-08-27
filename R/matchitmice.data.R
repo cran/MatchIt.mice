@@ -1,6 +1,6 @@
 #' @title Outputs Matched Imputed Datasets
 #'
-#' @keywords functions
+#' @keywords function
 #'
 #' @aliases matchitmice.data
 #'
@@ -13,7 +13,7 @@
 #'
 #' @details The matched datasets wihtin the \code{mimids} class object are extracted.
 #'
-#' @return This function returns a subset of the imputed dataset sent to \code{matchitmice()} with just the matched individuals.
+#' @return This function returns a subset of the imputed dataset after matching with just the matched observations from treatment and control groups.
 #'
 #' @seealso \code{\link[=mimids]{mimids}}
 #'
@@ -25,20 +25,19 @@
 #'
 #' @examples
 #' \donttest{
-#' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
+#' #Loading the 'dt.osa' dataset
+#' data(dt.osa)
 #'
-#' #Loading the 'handoa' dataset
-#' data(handoa)
-#'
-#' #Imputing the missing data points in the 'handoa' dataset
-#' datasets <- mice(handoa, m = 5, maxit = 1,
-#'                  method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#' #Imputing missing data points in the'dt.osa' dataset
+#' datasets <- mice(dt.osa, m = 5, maxit = 1,
+#'                  method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 #'
 #' #Matching the imputed datasets, 'datasets'
-#' matcheddatasets <- matchitmice(HANDOA ~ SEX + AGE, datasets)
+#' matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+#'                                approach = 'within', method = 'exact')
 #'
 #' #Extracting data of the first imputed dataset
-#' data1 <- matchitmice.data(matcheddatasets, n = 1)
+#' data.1 <- matchitmice.data(matcheddatasets, n = 1)
 #' }
 
 matchitmice.data <- function (object, n = 1) {
@@ -55,6 +54,8 @@ matchitmice.data <- function (object, n = 1) {
 
   #Returning the output
   output <- object[[4]][[n + 1]][complete.cases(object[[4]][[n + 1]][ , "weights"]),]
+  output$.id <- NULL
+  output$.imp <- NULL
   return(output)
 }
 

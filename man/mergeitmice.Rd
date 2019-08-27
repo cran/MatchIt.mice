@@ -9,7 +9,7 @@ mergeitmice(datasets, data, by = "ID")
 \arguments{
 \item{datasets}{This argument specifies an object of the \code{mids}, \code{mimids}, or \code{wimids} class.}
 
-\item{data}{This argument specifies a data frame.}
+\item{data}{This argument specifies a dataframe.}
 
 \item{by}{This argument specifies a variable name, present in bot \code{datasets} and \code{data}.}
 }
@@ -24,18 +24,20 @@ This functions can be used instead of the \code{cbind()} function (from the \pkg
 }
 \examples{
 \donttest{
-#Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
+#Loading the 'dt.osa' and 'dt.osp' datasets
+data(dt.osa)
+data(dt.osp)
 
-#Loading and preparing the 'handoa' dataset
-data(handoa)
-idenoa <- handoa["ID", "HANDOA"]
-handoa <- handoa[c("ID", "AGE", "SEX", "BMI", "SMOKING", "HANDUSE", "KNEEOA")]
+#Imputing missing data points in the'dt.osa' dataset
+datasets <- mice(dt.osa, m = 5, maxit = 1,
+                 method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 
-#Imputing the missing data points in the'handoa' dataset
-datasets <- mice(handoa, m = 5, maxit = 10)
+#Matching the imputed datasets, 'datasets'
+matcheddatasets <- matchitmice(KOA ~ SEX + AGE + SMK, datasets,
+                               approach = 'within', method = 'exact')
 
-#Merging the dataframe, 'idenoa', with each imputed dataset of the 'datasets' object
-datasets <- mergeitmice(datasets, idenoa, by = "ID")
+#Merging the dataframe, 'dt.osp', with each imputed dataset of the 'matcheddatasets' object
+matcheddatasets <- mergeitmice(matcheddatasets, dt.osp, by = "IDN")
 }
 }
 \references{
@@ -51,4 +53,4 @@ Stef van Buuren and Karin Groothuis-Oudshoorn (2011). \code{mice}: Multivariate 
 \author{
 Farhad Pishgar
 }
-\keyword{functions}
+\keyword{function}

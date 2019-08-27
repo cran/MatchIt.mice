@@ -1,6 +1,6 @@
 #' @title Outputs Weighted Imputed Datasets
 #'
-#' @keywords functions
+#' @keywords function
 #'
 #' @aliases weightitmice.data
 #'
@@ -13,7 +13,7 @@
 #'
 #' @details The weighted datasets within the \code{wimids} class object are extracted.
 #'
-#' @return This function returns the imputed dataset sent to \code{weightitmice()} with weights of individuals of the datasets added (listed as the \code{inverse.weights} variables).
+#' @return This function returns the imputed dataset after weighting with weights of observations included in the dataset (listed as the \code{inverse.weights} variables).
 #'
 #' @seealso \code{\link[=wimids]{wimids}}
 #'
@@ -25,20 +25,19 @@
 #'
 #' @examples
 #' \donttest{
-#' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
+#' #Loading the 'dt.osa' dataset
+#' data(dt.osa)
 #'
-#' #Loading the 'handoa' dataset
-#' data(handoa)
-#'
-#' #Imputing the missing data points in the 'handoa' dataset
-#' datasets <- mice(handoa, m = 5, maxit = 1,
-#'                  method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#' #Imputing missing data points in the'dt.osa' dataset
+#' datasets <- mice(dt.osa, m = 5, maxit = 1,
+#'                  method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 #'
 #' #Weighting the imputed datasets, 'datasets'
-#' weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
+#' weighteddatasets <- weightitmice(KOA ~ SEX + AGE + SMK, datasets,
+#'                                  approach = 'within', method = 'nearest')
 #'
 #' #Extracting data of the first imputed dataset
-#' data1 <- weightitmice.data(weighteddatasets, n = 1)
+#' data.1 <- weightitmice.data(weighteddatasets, n = 1)
 #' }
 
 weightitmice.data <- function (object, n = 1) {
@@ -55,6 +54,8 @@ weightitmice.data <- function (object, n = 1) {
 
   #Returning the output
   output <- object[[4]][[n + 1]][complete.cases(object[[4]][[n + 1]][ , "weights"]),]
+  output$.id <- NULL
+  output$.imp <- NULL
   return(output)
 }
 

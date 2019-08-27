@@ -1,6 +1,6 @@
 #' @title Evaluates an Expression in Weighted Imputed Datasets
 #'
-#' @keywords functions
+#' @keywords function
 #'
 #' @rdname with.wimids
 #'
@@ -10,10 +10,10 @@
 #' @param expr This argument specifies an expression of the usual syntax of R formula. See \code{help(formula)} for details.
 #' @param ... Additional arguments to be passed to \code{expr}.
 #'
-#' @description The \code{with()} function performs a computation on each of the \code{m} imputed datasets. The typical sequence of steps to estimate weights of individuals of the imputed datasets are:
+#' @description The \code{with()} function performs a computation on each of the \code{m} imputed datasets. The typical sequence of steps to estimate weights of observations of the imputed datasets are:
 #' \enumerate{
 #'  \item Impute the missing data points by the \code{mice} function (from the \pkg{mice} package), resulting in a multiple imputed dataset (an object of the \code{mids} class);
-#'  \item Estimate weights of individuals in the imputed datasets by the \code{weightitmice()} function, resulting in an object of the \code{wimids} class;
+#'  \item Estimate weights of observations in the imputed datasets by the \code{weightitmice()} function, resulting in an object of the \code{wimids} class;
 #'  \item Fit the model of interest (scientific model) on each weighted dataset by the \code{with()} function, resulting in an object of the \code{mira} class;
 #'  \item Pool the estimates from each model into a single set of estimates and standard errors, resulting in an object of the \code{mipo} class.
 #' }
@@ -32,22 +32,24 @@
 #'
 #' @examples
 #' \donttest{
-#' #Please see the package repository <https://github.com/FarhadPishgar/MatchIt.mice> for details.
+#' #Loading the 'dt.osa' dataset
+#' data(dt.osa)
 #'
-#' #Loading the 'handoa' dataset
-#' data(handoa)
-#'
-#' #Imputing the missing data points in the 'handoa' dataset
-#' datasets <- mice(handoa, m = 5, maxit = 1,
-#'                  method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#' #Imputing missing data points in the'dt.osa' dataset
+#' datasets <- mice(dt.osa, m = 5, maxit = 1,
+#'                  method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 #'
 #' #Weighting the imputed datasets, 'datasets'
-#' weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
+#' weighteddatasets <- weightitmice(KOA ~ SEX + AGE + SMK, datasets,
+#'                                  approach = 'within', method = 'nearest')
+#'
+#' #Merging the dataframe, 'dt.osp', with each imputed dataset of the 'weighteddatasets' object
+#' weighteddatasets <- mergeitmice(weighteddatasets, dt.osp, by = "IDN")
 #'
 #' #Analyzing the imputed datasets
-#' results <- with(data = weighteddatasets,
-#'                 exp = glm(HANDOA ~ SMOKING, weights = inverse.weights,
-#'                           na.action = na.omit, family = binomial))
+#' models <- with(data = weighteddatasets,
+#'                exp = glm(KOA ~ PTH, weights = inverse.weights,
+#'                          na.action = na.omit, family = binomial))
 #' }
 
 with.wimids <- function(data, expr, ...) {

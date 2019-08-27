@@ -20,15 +20,16 @@ The class of objects are checked to be of the \code{wimids}.
 }
 \examples{
 \donttest{
-#Loading the 'handoa' dataset
-data(handoa)
+#Loading the 'dt.osa' dataset
+data(dt.osa)
 
-#Imputing the missing data points in the 'handoa' dataset
-datasets <- mice(handoa, m = 5, maxit = 1,
-                 method = c("", "", "", "mean", "polyreg", "logreg", "", ""))
+#Imputing missing data points in the'dt.osa' dataset
+datasets <- mice(dt.osa, m = 5, maxit = 1,
+                 method = c("", "", "mean", "", "polyreg", "logreg", "logreg"))
 
 #Weighting the imputed datasets, 'datasets'
-weighteddatasets <- weightitmice(HANDOA ~ SEX + AGE, datasets)
+weighteddatasets <- weightitmice(KOA ~ SEX + AGE + SMK, datasets,
+                                 approach = 'within', method = 'nearest')
 
 #Checking the 'weighteddatasets' object
 is.wimids(weighteddatasets)
@@ -43,4 +44,4 @@ is(weighteddatasets)
 \author{
 Farhad Pishgar
 }
-\keyword{functions}
+\keyword{function}
